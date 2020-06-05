@@ -5,6 +5,8 @@ import com.unionman.springbootredis1.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Zhifeng.Zeng
  * @descrption
@@ -35,6 +37,14 @@ public class RedisTestController {
         String cache = redisUtils.get(key, String.class);
 
         return cache;
+    }
+
+    @GetMapping("/cache/list")
+    public List<String> getCaches(String keyPrefix){
+
+        List<String> caches = redisUtils.getByKeyPrefix(keyPrefix);
+
+        return caches;
     }
 
     @PutMapping("/cache")
